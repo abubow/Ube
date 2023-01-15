@@ -1,6 +1,13 @@
 <a>
-    <h1>
-        Übe
-    </h1>
+	<h1>Übe</h1>
 </a>
-<hr>
+<form
+	method="GET"
+	action="{% url 'home' %}">
+	<input
+		type="text"
+		name="q"
+		placeholder="Search Rooms" />
+</form>
+<a href="{% url 'login' %}"> Login </a>
+<hr />

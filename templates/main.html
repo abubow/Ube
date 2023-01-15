@@ -23,6 +23,15 @@
 	<body>
 		<header>
 			<nav>{% include 'navbar.html' %}</nav>
+			{% if messages %}
+			<ul>
+				{% for message in messages %}
+				<li class="alert alert-{{ message.category }} alert-dismissible fade show" role="alert">
+					{{ message }}
+				</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
 		</header>
 		{% block content %} {% endblock %}
 	</body>
