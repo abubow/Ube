@@ -109,79 +109,78 @@ a {
 	border: 2px solid var(--color-main);
 }
 .action-button {
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
 }
 
 .avatar {
-  position: relative;
-  display: inline-block;
-  border-radius: 50%;
-  border: 2px solid var(--color-main);
+	position: relative;
+	display: inline-block;
+	border-radius: 50%;
+	border: 2px solid var(--color-main);
 }
 
 .avatar img {
-  display: block;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
+	display: block;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
 }
 
 .avatar::after {
-  content: "";
-  display: block;
-  position: absolute;
-  background-color: var(--color-gray);
-  z-index: 111;
-  border-radius: 50%;
-  border: 0.3rem solid var(--color-dark);
+	content: "";
+	display: block;
+	position: absolute;
+	background-color: var(--color-gray);
+	z-index: 111;
+	border-radius: 50%;
+	border: 0.3rem solid var(--color-dark);
 }
 
 .avatar.active::after {
-  background-color: var(--color-success);
+	background-color: var(--color-success);
 }
 
 .avatar.avatar--small img {
-  width: 2.8rem;
-  height: 2.8rem;
+	width: 2.8rem;
+	height: 2.8rem;
 }
 
 .avatar.avatar--small:after {
-  width: 0.7rem;
-  height: 0.7rem;
-  bottom: 0px;
-  right: -6px;
+	width: 0.7rem;
+	height: 0.7rem;
+	bottom: 0px;
+	right: -6px;
 }
 
 .avatar.avatar--medium img {
-  width: 3.6rem;
-  height: 3.6rem;
-  border-radius: 50%;
+	width: 3.6rem;
+	height: 3.6rem;
+	border-radius: 50%;
 }
 
 .avatar.avatar--medium:after {
-  width: 0.7rem;
-  height: 0.7rem;
-  bottom: 0px;
-  right: -6px;
+	width: 0.7rem;
+	height: 0.7rem;
+	bottom: 0px;
+	right: -6px;
 }
 
 .avatar.avatar--large img {
-  display: block;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
+	display: block;
+	width: 8rem;
+	height: 8rem;
+	border-radius: 50%;
 }
 
 .avatar.avatar--large:after {
-  width: 1rem;
-  height: 1rem;
-  bottom: 2px;
-  right: 3.5px;
+	width: 1rem;
+	height: 1rem;
+	bottom: 2px;
+	right: 3.5px;
 }
-
 
 .header {
 	padding: 1.5rem;
@@ -191,6 +190,24 @@ a {
 .header > .container {
 	display: flex;
 	gap: 9.5rem;
+}
+
+.header__logo,
+.header__user {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+}
+
+.header__logo > img {
+	height: 3.2rem;
+	width: 3.2rem;
+}
+
+.header__logo > h1 {
+	font-weight: 700;
+	font-size: 2rem;
+	color: var(--color-light);
 }
 
 .header__search > label {
@@ -231,8 +248,91 @@ a {
 		display: none;
 	}
 }
-.header__logo {
+
+@media screen and (max-width: 700px) {
+	.header__logo h1 {
+		display: none;
+	}
+}
+
+.header__menu {
+	margin-left: auto;
+	position: relative;
+}
+
+.header__menu a {
 	display: flex;
-	gap: 2rem;
+	gap: 1.5rem;
 	align-items: center;
+	font-weight: 500;
+	text-decoration: none;
+	color: var(--color-gray);
+}
+
+.header__menu img {
+	height: 3.6rem;
+}
+
+.header__menu p {
+	line-height: 1.2;
+}
+
+.header__menu span {
+	color: var(--color-main);
+	font-weight: 500;
+	font-size: 1.4rem;
+	display: block;
+}
+
+.header__menu svg {
+	width: 1.6rem;
+	height: 1.6rem;
+	fill: var(--color-dark-light);
+}
+
+.dropdown-button {
+	background: transparent;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.dropdown-button:hover svg {
+	fill: var(--color-main);
+}
+
+.dropdown-menu {
+	z-index: 111;
+	position: absolute;
+	top: 5rem;
+	right: 0.5rem;
+	background: var(--color-dark-light);
+	border-radius: 5px;
+	box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	display: none;
+}
+
+.dropdown-menu.show {
+	display: block;
+}
+
+.dropdown-menu a {
+	padding: 1.2rem 4rem;
+	display: block;
+	color: var(--color-light) !important;
+	font-weight: 500;
+	font-size: 1.4rem;
+}
+
+.dropdown-menu a:hover {
+	background-color: var(--color-dark-medium);
+}
+
+.dropdown-menu > a:not(:last-child) {
+	border-bottom: 1px solid var(--color-dark-medium);
+}
+
+.dropdown-menu a svg {
+	fill: var(--color-light);
 }
