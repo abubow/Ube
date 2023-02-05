@@ -18,7 +18,9 @@
 			</li>
 			{% for topic in topics %}
 			<li>
-				<a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
+				<a href="{% url 'home' %}?q={{ topic.name }}"
+					>{{ topic.name }}</a
+				>
 			</li>
 			{% endfor %}
 		</ul>
@@ -29,8 +31,10 @@
 		<ul>
 			{% for room in rooms %}
 			<li>
+				{% if room.host == user %}
 				<a href="{% url 'update-room' room.id %}"> Edit </a>
 				<a href="{% url 'delete-room' room.id %}"> Delete </a>
+				{% endif %}
 				<span> @{{room.host.username}} </span>
 				<a href="{% url 'room' room.link %}">{{ room.name }}</a>
 				<ol>
@@ -55,7 +59,9 @@
 			</li>
 			{% for topic in topics %}
 			<li>
-				<a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
+				<a href="{% url 'home' %}?q={{ topic.name }}"
+					>{{ topic.name }}</a
+				>
 			</li>
 			{% endfor %}
 		</ul>

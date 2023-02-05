@@ -1,3 +1,16 @@
 {% extends "main.html" %} {% block content %}
 <h1>{{ room_name }}</h1>
+<p>{{ room_description }}</p>
+
+<div class="comment-wrapper">
+	<h3>Conversation</h3>
+	<hr />
+    {% for message in messages %}
+        <div class="comment">
+            <small class="comment-user">{{ message.user }} {{message.user_id}}</small>
+            <div class="comment-message">{{ message.message }}</div>
+            <div class="comment-date">{{ message.date }}</div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}
