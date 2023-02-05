@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
 :root {
-  --color-light-gray: #b2bdbd;
-  --color-bg: #2d2d39;
+	--color-light-gray: #b2bdbd;
+	--color-bg: #2d2d39;
 }
-
+* {
+	font-family: 'Aboreto', cursive;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-rendering: optimizeLegibility;
+	font-size: inherit;
+}
 html {
 	font-size: 56.25%;
 }
