@@ -62,12 +62,17 @@ def logoutUser(request):
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
     rooms = user.rooms_hosted.all() | user.rooms_joined.all()
-    print(rooms)
+    topics = Topic.objects.filter(rooms__in=rooms)
+    recent_messages = Message.objects.filter(
+        user=user).order_by('-created')[:5]
     context = {
         "user": user,
-        "rooms": rooms.all()
+        "rooms": rooms,
+        "topics": topics,
+        "recent_messages": recent_messages,
     }
     return render(request, 'base/profile.html', context)
+
 
 def registerPage(request):
     context = {
@@ -85,7 +90,8 @@ def registerPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'An error has occurred during registration')
+            messages.error(
+                request, 'An error has occurred during registration')
     return render(request, 'base/login_register.html', context)
 
 
@@ -190,6 +196,7 @@ def delete_room(request, pk):
         'item': room
     }
     return render(request, 'base/delete.html', context)
+
 
 @login_required(login_url='login')
 def delete_message(request, pk):

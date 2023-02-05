@@ -1,19 +1,16 @@
-{% extends 'main.html' %}
-
-{% block content %}
-    <h1>
-        {{user.name}}
-    </h1>
-<div>
-    <div>
-        
-    </div>
-    <div>
-        {% include 'components/feed.html' %}
-    </div>
-    <div>
-        
-    </div>
+{% extends 'main.html' %} {% block content %}
+<h1>{{user.name}}</h1>
+<style>
+    .user-profile {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-gap: 10px;
+    }
+</style>
+<div class="user-profile">
+	<div>{% include "components/topic_list.html" %}</div>
+	<div>{% include 'components/feed.html' %}</div>
+	<div>{% include "components/recent_activity.html" %}</div>
 </div>
 
 {% endblock content %}

@@ -9,7 +9,9 @@
 					{% endif %}
 				<p>{{ post }}
 				</p>
-				<small>{{ post.user }} - {{ post.created|timesince }} ago replied to <a href="{% url 'room' post.room.link %}">{{ post.room.name }}</a></small>
+				<small>
+					<a href="{% url 'profile' post.user.id %}">{{ post.user.username }}</a>
+					 - {{ post.created|timesince }} ago replied to <a href="{% url 'room' post.room.link %}">{{ post.room.name }}</a></small>
 				<hr />
 			</li>
 			{% endfor %}
