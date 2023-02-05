@@ -3,52 +3,17 @@
 <style>
 	.home-container {
 		display: grid;
-		grid-template-columns: 1fr 3fr;
+		grid-template-columns: 1fr 3fr 1fr;
 	}
 </style>
 
 <main class="home-container">
 	{% if user.is_authenticated %}
-	<div>
-		<h3>Browse Topics</h3>
-		<hr />
-		<ul>
-			<li>
-				<a href="{% url 'home' %}">All</a>
-			</li>
-			{% for topic in topics %}
-			<li>
-				<a href="{% url 'home' %}?q={{ topic.name }}"
-					>{{ topic.name }}</a
-				>
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div>
-		<h5>{{ rooms.count }} rooms available</h5>
-		<a href="{% url 'room-form' %}">Create Room</a>
-		<ul>
-			{% for room in rooms %}
-			<li>
-				{% if room.host == user %}
-				<a href="{% url 'update-room' room.id %}"> Edit </a>
-				<a href="{% url 'delete-room' room.id %}"> Delete </a>
-				{% endif %}
-				<span> @{{room.host.username}} </span>
-				<a href="{% url 'room' room.link %}">{{ room.name }}</a>
-				<ol>
-					{% for topic in room.topics.all %}
-					<li>{{ topic.name }}</li>
-					{% endfor %}
-				</ol>
-				<span> {{ room.participants.count }} participants </span>
-				<small> {{ room.participants.all|join:", " }} </small>
-				<hr />
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
+	<div>{% include 'components/topic_list.html' %}</div>
+	<h5>{{ rooms.count }} rooms available</h5>
+	<a href="{% url 'room-form' %}">Create Room</a>
+	{% include 'components/feed.html' %}
+	<div>{% include 'components/recent_activity.html' %}</div>
 	{% else %}
 	<div>
 		<h3>Browse Topics</h3>

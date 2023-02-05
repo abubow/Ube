@@ -1,0 +1,16 @@
+<h3>Recent Posts</h3>
+		</hr>
+		<ul>
+			{% for post in recent_messages %}
+			<li>
+				
+					{% if post.user_id == request.user.id %}
+						<a href="{% url 'delete-message' post.id %}">Delete</a>
+					{% endif %}
+				<p>{{ post }}
+				</p>
+				<small>{{ post.user }} - {{ post.created|timesince }} ago replied to <a href="{% url 'room' post.room.link %}">{{ post.room.name }}</a></small>
+				<hr />
+			</li>
+			{% endfor %}
+		</ul>

@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 # Create your views here.
 from django.http import HttpResponse
-from .models import Room, Topic, User
+from .models import Room, Topic, User, Message
 from .forms import RoomForm
 
 
@@ -38,6 +38,36 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+# class Room(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     name = models.CharField(max_length=50)
+#     description = models.CharField(max_length=200, null=True, blank=True)
+#     link = models.CharField(max_length=50)
+#     # delete the room when the last topic it belongs to is deleted
+#     topics = models.ManyToManyField('Topic', related_name='rooms', blank=True)
+#     participants = models.ManyToManyField(
+#         User, related_name='rooms_joined', blank=True)
+#     host = models.ForeignKey(
+#         User, on_delete=models.CASCADE, related_name='rooms_hosted')
+#     updated = models.DateTimeField(auto_now=True)
+#     created = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.name
+
+#     class Meta:
+#         ordering = ['-updated', '-created']
+
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    rooms = user.rooms_hosted.all() | user.rooms_joined.all()
+    print(rooms)
+    context = {
+        "user": user,
+        "rooms": rooms.all()
+    }
+    return render(request, 'base/profile.html', context)
 
 def registerPage(request):
     context = {
@@ -69,23 +99,46 @@ def home(request):
             Q(name__icontains=q) |
             Q(description__icontains=q)
         ).distinct()
+        recent_messages = Message.objects.filter(
+            Q(room__topics__name__icontains=q) |
+            Q(room__topics__description__icontains=q) |
+            Q(room__name__icontains=q) |
+            Q(room__description__icontains=q) |
+            Q(message__icontains=q)
+        ).distinct().order_by('-created')[:5]
     else:
         # get all the rooms
         rooms = Room.objects.all()
+        recent_messages = Message.objects.all().order_by('-created')[:5]
     topics = Topic.objects.all()
     context = {
         'rooms': rooms,
-        'topics': topics
+        'topics': topics,
+        'recent_messages': recent_messages,
     }
     return render(request, 'base/home.html', context)
 
 
 def room(request, room_name):
     room = Room.objects.get(link=room_name)
-    messages = room.messages_set.all().order_by('-timestamp')
+    room_messages = room.message_set.all().order_by('-created')
+    participants = room.participants.all()
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        if message:
+            Message.objects.create(
+                user=request.user,
+                room=room,
+                message=message
+            )
+            room.participants.add(request.user)
+            room.save()
+            return redirect('room', room_name=room_name)
+
     context = {
         'room_name': room.description,
-        'messages': messages,
+        'room_messages': room_messages,
+        'participants': participants
     }
     return render(request, 'base/room.html', context)
 
@@ -135,5 +188,20 @@ def delete_room(request, pk):
         return redirect('home')
     context = {
         'item': room
+    }
+    return render(request, 'base/delete.html', context)
+
+@login_required(login_url='login')
+def delete_message(request, pk):
+    room_message = Message.objects.get(id=pk)
+    print(request.user)
+    print(room_message.user)
+    if request.user != room_message.user:
+        return HttpResponse('You are not authorized to view this page')
+    if request.method == 'POST':
+        room.delete()
+        return redirect('home')
+    context = {
+        'item': room_message
     }
     return render(request, 'base/delete.html', context)

@@ -1,16 +1,60 @@
 {% extends "main.html" %} {% block content %}
-<h1>{{ room_name }}</h1>
-<p>{{ room_description }}</p>
+<style>
+	.room-container {
+		display: grid;
+		grid-template-columns: 3fr 1fr;
+	}
+</style>
+<section class="room-container">
+	<main>
+		<h1>{{ room_name }}</h1>
+		<p>{{ room_description }}</p>
 
-<div class="comment-wrapper">
-	<h3>Conversation</h3>
-	<hr />
-    {% for message in messages %}
-        <div class="comment">
-            <small class="comment-user">{{ message.user }} {{message.user_id}}</small>
-            <div class="comment-message">{{ message.message }}</div>
-            <div class="comment-date">{{ message.date }}</div>
-        </div>
-    {% endfor %}
-</div>
+		<div class="comment-wrapper">
+			<h3>Conversation</h3>
+			<hr />
+			{% for message in room_messages %}
+			<div class="comment">
+                {% if message.user_id == request.user.id %}
+                    <a href="{% url 'delete-message' message.id %}">Delete</a>
+                {% endif %}
+                <small class="comment-user"
+					>{{ message.user }} {{message.user_id}}
+					<div class="comment-date">
+						{{ message.created|timesince }} ago
+					</div></small
+				>
+				<small class="comment-user">{{ message.user }}</small>
+				<p class="comment-message">{{ message.message }}</p>
+			</div>
+			{% endfor %}
+		</div>
+		{%if request.user.is_authenticated%}
+		<div id="comment-form">
+			<form
+				action=""
+				method="post">
+				{%csrf_token%}
+				<input
+					type="text"
+					name="message"
+					placeholder="Enter your message here..." /><input
+					type="submit"
+					value="Send" />
+			</form>
+		</div>
+		{%else%}
+		<div id="comment-form">Sign in to send a message</div>
+		{%endif%}
+	</main>
+	<aside>
+		<h3>Participants</h3>
+		<hr />
+		{% for user in participants %}
+		<div class="user">
+			<small class="user-name">{{ user }}</small>
+		</div>
+		{% endfor %}
+	</aside>
+</section>
 {% endblock %}
