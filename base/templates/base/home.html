@@ -10,9 +10,11 @@
 <main class="home-container">
 	{% if user.is_authenticated %}
 	<div>{% include 'components/topic_list.html' %}</div>
-	<h5>{{ rooms.count }} rooms available</h5>
-	<a href="{% url 'room-form' %}">Create Room</a>
-	{% include 'components/feed.html' %}
+	<div>
+		<h5>{{ rooms.count }} rooms available</h5>
+		<a href="{% url 'room-form' %}">Create Room</a>
+		{% include 'components/feed.html' %}
+	</div>
 	<div>{% include 'components/recent_activity.html' %}</div>
 	{% else %}
 	<div>

@@ -157,7 +157,11 @@ def room_form(request):
         if form.is_valid():
             print('form is valid')
             print(form.cleaned_data)
-            form.save()
+            room = form.save(commit=False)
+            room.host = request.user
+            room.participants.add(request.user)
+            room.link = room.name.replace(' ', '_').lower()
+            room.save()
             return redirect('home')
     context = {
         'form': form
