@@ -1,38 +1,36 @@
 {% extends "main.html" %} {% block content %}
 
-<style>
-	.home-container {
-		display: grid;
-		grid-template-columns: 1fr 3fr 1fr;
-	}
-</style>
-
-<main class="home-container">
-	{% if user.is_authenticated %}
-	<div>{% include 'components/topic_list.html' %}</div>
-	<div>
-		<h5>{{ rooms.count }} rooms available</h5>
-		<a href="{% url 'room-form' %}">Create Room</a>
-		{% include 'components/feed.html' %}
+<main class="layout layout--3">
+	<div class="container">
+		{% if user.is_authenticated %}
+		<div class="topics">{% include 'components/topic_list.html' %}</div>
+		<div class="roomList">
+			<h5>{{ rooms.count }} rooms available</h5>
+			<a href="{% url 'room-form' %}">Create Room</a>
+			{% include 'components/feed.html' %}
+		</div>
+		<div class="activities">
+			{% include 'components/recent_activity.html' %}
+		</div>
+		{% else %}
+		<div class="topics">
+			<div class="topics__header">
+				<h2>Browse Topics</h2>
+			</div>
+			<ul class="topics__list">
+				<li>
+					<a href="{% url 'home' %}">All</a>
+				</li>
+				{% for topic in topics %}
+				<li>
+					<a href="{% url 'home' %}?q={{ topic.name }}"
+						>{{ topic.name }}</a
+					>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
 	</div>
-	<div>{% include 'components/recent_activity.html' %}</div>
-	{% else %}
-	<div>
-		<h3>Browse Topics</h3>
-		<hr />
-		<ul>
-			<li>
-				<a href="{% url 'home' %}">All</a>
-			</li>
-			{% for topic in topics %}
-			<li>
-				<a href="{% url 'home' %}?q={{ topic.name }}"
-					>{{ topic.name }}</a
-				>
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
-	{% endif %}
 </main>
 {% endblock %}
