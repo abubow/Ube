@@ -144,7 +144,8 @@ def room(request, room_name):
     context = {
         'room_name': room.description,
         'room_messages': room_messages,
-        'participants': participants
+        'participants': participants,
+        'room': room,
     }
     return render(request, 'base/room.html', context)
 
