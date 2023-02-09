@@ -116,7 +116,7 @@ def home(request):
         # get all the rooms
         rooms = Room.objects.all()
         recent_messages = Message.objects.all().order_by('-created')[:5]
-    topics = Topic.objects.all()
+    topics = Topic.objects.all()[:5]
     context = {
         'rooms': rooms,
         'topics': topics,
@@ -217,7 +217,7 @@ def delete_message(request, pk):
     if request.user != room_message.user:
         return HttpResponse('You are not authorized to view this page')
     if request.method == 'POST':
-        room.delete()
+        room_message.delete()
         return redirect('home')
     context = {
         'item': room_message
@@ -239,3 +239,13 @@ def update_user(request, pk):
         else:
             return HttpResponse('Form is not valid')
     return render(request, 'base/edit_user.html', {'form': form})
+
+
+def topics(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    topics = Topic.objects.filter(name__icontains=q)
+    return render(request, 'base/topics.html', {'topics': topics})
+
+def activity(request):
+    room_messages = Message.objects.all()
+    return render(request, 'base/activity.html', {'room_messages': room_messages})

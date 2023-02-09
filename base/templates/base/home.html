@@ -8,7 +8,10 @@
 		<!-- Room List Start -->
 		<div class="roomList">
 			<div class="mobile-menu">
-				<form class="header__search">
+				<form
+					class="header__search"
+					method="GET"
+					action="{% url 'home' %}">
 					<label>
 						<svg
 							version="1.1"
@@ -26,12 +29,12 @@
 				<div class="mobile-menuItems">
 					<a
 						class="btn btn--main btn--pill"
-						href="#"
+						href="{% url 'topics' %}"
 						>Browse Topics</a
 					>
 					<a
 						class="btn btn--main btn--pill"
-						href="#"
+						href="{% url 'recent-activity' %}"
 						>Recent Activities</a
 					>
 				</div>
@@ -43,7 +46,7 @@
 				</div>
 				<a
 					class="btn btn--main"
-					href="{% url 'room-form' %}"
+					href="{% url 'room-form' %}">
 					<svg
 						version="1.1"
 						xmlns="http://www.w3.org/2000/svg"
