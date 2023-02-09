@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 
 
 class Room(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True, auto_created=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200, null=True, blank=True)
-    link = models.CharField(max_length=50)
+    link = models.CharField(max_length=50, unique=True)
     # delete the room when the last topic it belongs to is deleted
     topics = models.ManyToManyField('Topic', related_name='rooms', blank=True)
     participants = models.ManyToManyField(

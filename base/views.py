@@ -7,7 +7,7 @@ from django.contrib import messages
 # Create your views here.
 from django.http import HttpResponse
 from .models import Room, Topic, User, Message
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 
 
 def loginPage(request):
@@ -66,7 +66,7 @@ def userProfile(request, pk):
     recent_messages = Message.objects.filter(
         user=user).order_by('-created')[:5]
     context = {
-        "user": user,
+        "profuser": user,
         "rooms": rooms,
         "topics": topics,
         "recent_messages": recent_messages,
@@ -125,8 +125,8 @@ def home(request):
     return render(request, 'base/home.html', context)
 
 
-def room(request, room_name):
-    room = Room.objects.get(link=room_name)
+def room(request, pk):
+    room = Room.objects.get(link=pk)
     room_messages = room.message_set.all().order_by('-created')
     participants = room.participants.all()
     if request.method == 'POST':
@@ -139,10 +139,9 @@ def room(request, room_name):
             )
             room.participants.add(request.user)
             room.save()
-            return redirect('room', room_name=room_name)
+            return redirect('room', pk=pk)
 
     context = {
-        'room_name': room.description,
         'room_messages': room_messages,
         'participants': participants,
         'room': room,
@@ -152,21 +151,25 @@ def room(request, room_name):
 
 @login_required(login_url='login')
 def room_form(request):
+    topics = Topic.objects.all()
     form = RoomForm()
+    context = {
+        'form': form,
+        'topics': topics,
+    }
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            print('form is valid')
-            print(form.cleaned_data)
             room = form.save(commit=False)
             room.host = request.user
-            room.participants.add(request.user)
             room.link = room.name.replace(' ', '_').lower()
             room.save()
+            form.save_m2m()
             return redirect('home')
-    context = {
-        'form': form
-    }
+        else:
+            messages.error(
+                request, 'An error has occurred during room creation')
+            return render(request, 'base/room_form.html', context)
     return render(request, 'base/room_form.html', context)
 
 
@@ -174,7 +177,12 @@ def room_form(request):
 def update_room(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
-
+    topics = Topic.objects.all()
+    context = {
+        'form': form,
+        'topics': topics,
+        'room': room,
+    }
     if request.user != room.host:
         return HttpResponse('You are not authorized to view this page')
 
@@ -183,9 +191,7 @@ def update_room(request, pk):
         if form.is_valid():
             form.save()
             return redirect('home')
-    context = {
-        'form': form
-    }
+
     return render(request, 'base/room_form.html', context)
 
 
@@ -217,3 +223,19 @@ def delete_message(request, pk):
         'item': room_message
     }
     return render(request, 'base/delete.html', context)
+
+
+@login_required(login_url='login')
+def update_user(request, pk):
+    user = User.objects.get(id=pk)
+    form = UserForm(instance=user)
+    if request.user != user:
+        return HttpResponse('You are not authorized to view this page')
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', pk=pk)
+        else:
+            return HttpResponse('Form is not valid')
+    return render(request, 'base/edit_user.html', {'form': form})

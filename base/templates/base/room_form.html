@@ -1,12 +1,83 @@
 {% extends "main.html" %} {% block content %}
-
+<main class="create-room layout">
+	<div class="container">
+		<div class="layout__box">
+			<div class="layout__boxHeader">
+				<div class="layout__boxTitle">
+					<a href="{% url 'home' %}">
+						<svg
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							width="32"
+							height="32"
+							viewBox="0 0 32 32">
+							<title>arrow-left</title>
+							<path
+								d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"></path>
+						</svg>
+					</a>
+					<h3>Put Philosophy Room</h3>
+				</div>
+			</div>
+			{% comment %} from django.forms import ModelForm from .models import
+			Room, Topic, Message class RoomForm(ModelForm): class Meta: model =
+			Room fields = '__all__' exclude = ['host', 'participants', 'link']
+			{% endcomment %}
+			<div class="layout__body">
+				<form
+					class="form"
+					action=""
+					method="POST">
+					{% csrf_token %}
+					<div class="form__group">
+						<label for="{{form.name.id_for_label}}" class="form__label">
+							{{form.name.label}} 
+						</label>
+						{{form.name}}
+					</div>
+					<div class="form__group">
+						<label for="room_topics"> {{form.topics.label}} </label>
+						{{form.topics}}
+						<div class="form__helper">
+							<p>
+								Press Ctrl or Cmd and click to select multiple
+								topics.
+							</p>
+						</div>
+					</div>
+					<div class="form__group">
+						<label for="room_description">
+							{{form.description.label}}
+						</label>
+						{{form.description}}
+					</div>
+					<div class="form__action">
+						<a
+							class="btn btn--dark"
+							href="{% url 'home' %}"
+							>Cancel</a
+						>
+						<button
+							class="btn btn--main"
+							type="submit">
+							Submit Room
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
 <main>
-	<form action="" method="POST">
-        {% csrf_token %}
-		{{form.as_p}}
-		<button type="submit" class="btn">
-            Create Room
-        </button>
+	<form
+		action=""
+		method="POST">
+		{% csrf_token %} {{form.as_p}}
+		<button
+			type="submit"
+			class="btn">
+			Create Room
+		</button>
 	</form>
 </main>
 {% endblock %}

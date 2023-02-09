@@ -1,7 +1,9 @@
 {% extends 'main.html' %} {% block content %}
 <main class="profile-page layout layout--3">
 	<div class="container">
-		<div>{% include "components/topic_list.html" %}</div>
+		<div>
+      {% include "components/topic_list.html" %}
+    </div>
         <div class="roomList">
             <div class="profile">
               <div class="profile__avatar">
@@ -11,11 +13,13 @@
               </div>
               <div class="profile__info">
                 <h3>
-                    {{ user.username }}
+                    {{ profuser.username }}
                 </h3>
-                <p>@{{ user.username }}
+                <p>@{{ profuser.username }}
                 </p>
-                <a href="edit-user.html" class="btn btn--main btn--pill">Edit Profile</a>
+                {% if user == request.user %}
+                <a href="{% url 'edit-profile' profuser.id %}" class="btn btn--main btn--pill">Edit Profile</a>
+                {% endif %}
               </div>
               <div class="profile__about">
                 <h3>About</h3>
