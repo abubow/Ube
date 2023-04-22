@@ -130,7 +130,6 @@ STATIC_URL = 'staticfiles_build/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'staticfiles_build' / 'static',
-    BASE_DIR / 'staticfiles_build' / 'static' / 'css',
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
