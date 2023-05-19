@@ -22,11 +22,13 @@
 			rel="stylesheet"
 			type="text/css"
 			media="screen">
+			@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 			@import url("https://fonts.googleapis.com/css2?family=Aboreto&display=swap");
 			:root {
-				--color-main: #71c6dd;
+				/* --color-main: #71c6dd;
 				--color-main-light: #e1f6fb;
-				--color-dark: #3f4156;
+				--color-dark: rgba(63, 65, 86, 0.9); #3f4156 
 				--color-dark-medium: #51546e;
 				--color-dark-light: #696d97;
 				--color-light: #e5e5e5;
@@ -34,16 +36,41 @@
 				--color-light-gray: #b2bdbd;
 				--color-bg: #2d2d39;
 				--color-success: #5dd693;
-				--color-error: #fc4b0b;
+				--color-error: #fc4b0b; */
+
+				/* --color-main: #f2a6c8;
+				--color-main-light: #fef1fc;
+				--color-dark: #b3a0a1;
+				--color-dark-medium: #c4b5b6;
+				--color-dark-light: #e0c9ca;
+				--color-light: #f7f7f7;
+				--color-gray: #c4c4c4;
+				--color-light-gray: #e1d9d9;
+				--color-bg: #f5f0f0;
+				--color-success: #f0b88e;
+				--color-error: #8eff66; */
+
+				/* #c7522a, #8b3b1d, #ffdacd, #ffb59a, #ffffff, #f2f2f2, #e6e6e6, */
+				--color-main: #8b3b1d;
+				--color-main-light: #ffdacd;
+				--color-dark: #3d3d3d;
+				--color-dark-medium: #c7522a ;
+				--color-dark-light: #ffb59a;
+				--color-light: #ffffff;/*#f2f2f2;*/
+				--color-gray: #e6e6e6;
+				--color-light-gray: #f2f2f2;
+				--color-bg: #f2f2f2;
+				--color-success: #8eff66;				
 			}
 
 			* {
-				font-family: "Aboreto", cursive;
+				font-family: "Montserrat", "Castoro Titling", "Aboreto", sans-serif;
 				margin: 0;
 				padding: 0;
 				box-sizing: border-box;
 				text-rendering: optimizeLegibility;
 				font-size: inherit;
+				font-weight: 300;	
 			}
 			html {
 				font-size: 56.25%;
@@ -95,9 +122,11 @@
 				cursor: pointer;
 				transition: all ease-in-out 0.3s;
 				padding: 1rem 2rem;
-				border-radius: 5px;
+				border-radius: 15px;
 				box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
 				font-weight: 500;
+				opacity: 95%;
+				backdrop-filter: blur(10%);
 			}
 
 			.btn--link {
@@ -113,7 +142,7 @@
 
 			.btn--main {
 				background-color: var(--color-main);
-				color: var(--color-dark);
+				color: var(--color-light);
 			}
 
 			.btn:hover {
@@ -122,7 +151,7 @@
 
 			.btn--dark {
 				background-color: var(--color-dark-light);
-				color: var(--color-light);
+				color: var(--color-dark);
 			}
 
 			.btn > svg {
@@ -169,7 +198,7 @@
 				background-color: var(--color-gray);
 				z-index: 111;
 				border-radius: 50%;
-				border: 0.3rem solid var(--color-dark);
+				border: 0.3rem solid var(--color-light);
 			}
 
 			.avatar.active::after {
@@ -244,7 +273,7 @@
 			.dropdown-menu a {
 				padding: 1.2rem 4rem;
 				display: block;
-				color: var(--color-light) !important;
+				color: var(--color-dark) !important;
 				font-weight: 500;
 				font-size: 1.4rem;
 			}
@@ -258,7 +287,7 @@
 			}
 
 			.dropdown-menu a svg {
-				fill: var(--color-light);
+				fill: var(--color-dark);
 			}
 
 			.mobile-menu {
@@ -280,7 +309,7 @@
 
 			.header {
 				padding: 1.5rem;
-				background-color: var(--color-dark);
+				background-color: var(--color-light);
 			}
 
 			.header > .container {
@@ -303,11 +332,11 @@
 			.header__logo > h1 {
 				font-weight: 700;
 				font-size: 2rem;
-				color: var(--color-light);
+				color: var(--color-dark);
 			}
 
 			.header__search > label {
-				background-color: var(--color-dark-medium);
+				background-color: var(--color-gray);
 				padding: 1.3rem 1rem;
 				display: flex;
 				align-items: center;
@@ -316,7 +345,7 @@
 			}
 
 			.header__search svg {
-				fill: var(--color-gray);
+				fill: var(--color-dark);
 				width: 2rem;
 				height: 2rem;
 				margin-left: 1rem;
@@ -327,7 +356,7 @@
 				background: transparent;
 				border: none;
 				outline: none;
-				color: var(--color-light);
+				color: var(--color-dark);
 			}
 
 			@media screen and (max-width: 800px) {
@@ -437,7 +466,7 @@
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -46%);
-				background-color: var(--color-dark);
+				background-color: var(--color-light);
 				border-radius: 1rem;
 				box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
 				overflow: hidden;
@@ -458,7 +487,7 @@
 			.layout__boxTitle h3 {
 				text-transform: uppercase;
 				font-weight: 500;
-				color: var(--color-light);
+				color: var(--color-dark);
 			}
 
 			.layout__boxTitle svg {
@@ -506,7 +535,7 @@
 				padding: 1rem;
 				border-radius: 3px;
 				width: 100%;
-				color: var(--color-light);
+				color: var(--color-dark);
 				font-weight: 500;
 				outline: none;
 			}
@@ -529,7 +558,7 @@
 
 			.form__group select option {
 				background-color: var(--color-dark-light);
-				color: var(--color-light);
+				color: var(--color-dark);
 				padding: 0 10rem;
 			}
 
@@ -563,7 +592,7 @@
 			.topics__header h2 {
 				text-transform: uppercase;
 				font-weight: 500;
-				color: var(--color-dark-light);
+				color: var(--color-main);
 			}
 
 			.topics__list {
@@ -575,7 +604,7 @@
 				justify-content: space-between;
 				margin-bottom: 3rem;
 				font-weight: 500;
-				color: var(--color-light-gray);
+				color: var(--color-dark);
 				transition: all 0.3s ease-in-out;
 			}
 
@@ -586,7 +615,8 @@
 
 			.topics__list li a span {
 				padding: 0.5rem 1rem;
-				background-color: var(--color-dark);
+				background-color: var(--color-light);
+				color: var(--color-dark);
 				border-radius: 3px;
 				font-size: 1.3rem;
 				font-weight: 700;
@@ -624,19 +654,19 @@
 
 			.roomList__header h2 {
 				text-transform: uppercase;
-				font-weight: 500;
-				color: var(--color-light);
+				font-weight: 700;
+				color: var(--color-main);
 				letter-spacing: 1px;
 			}
 
 			.roomList__header p {
 				font-weight: 500;
-				color: var(--color-dark-light);
+				color: var(--color-dark-medium);
 			}
 
 			.roomListRoom {
 				margin-bottom: 2.4rem;
-				background-color: var(--color-dark);
+				background-color: var(--color-light);
 				border-radius: 1rem;
 				padding: 2rem;
 			}
@@ -659,6 +689,7 @@
 				align-items: flex-start;
 				gap: 1rem;
 				position: relative;
+				color: var(--color-dark-light);
 			}
 
 			.roomListRoom__actions span {
@@ -675,13 +706,14 @@
 
 			.roomListRoom__content {
 				margin: 1rem 0;
+				color: var(--color-dark);
 			}
 
 			.roomListRoom__content a {
 				font-size: 2rem;
-				font-weight: 500;
+				font-weight: 700;
 				margin-bottom: 1.5rem;
-				color: var(--color-light);
+				color: var(--color-main);
 				transition: all 0.3s ease-in-out;
 			}
 
@@ -698,7 +730,7 @@
 			}
 
 			.roomListRoom__joined {
-				color: var(--color-light-gray);
+				color: var(--color-dark);
 				display: flex;
 				align-items: center;
 				gap: 1rem;
@@ -721,17 +753,17 @@
 			}
 
 			.activities {
-				background: var(--color-dark);
+				background: var(--color-light);
 				border-radius: 5px;
 				overflow: hidden;
 			}
 
 			.activities__header h2 {
-				background-color: var(--color-dark-light);
+				background-color: var(--color-main);
 				text-transform: uppercase;
 				font-weight: 500;
 				padding: 1rem 1.5rem;
-				color: var(--color-light);
+				color: var(--color-mian-light);
 				letter-spacing: 1px;
 				font-size: 1.4rem;
 			}
@@ -739,8 +771,11 @@
 			.activities__box {
 				margin: 1.5rem;
 				padding: 1.5rem;
-				border: 2px solid var(--color-dark-medium);
-				border-radius: 5px;
+				/* border: 2px solid var(--color-dark-medium); */
+				border-radius: 15px;
+				/* inward shadow */
+				box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+
 			}
 
 			.activities__boxHeader p {
@@ -768,6 +803,7 @@
 
 			.activities__boxRoomContent {
 				background: var(--color-bg);
+				color: var(--color-light);
 				padding: 1rem;
 				border-radius: 5px;
 				margin-top: 1rem;
@@ -833,7 +869,7 @@
 
 			.profile__info h3 {
 				font-size: 2rem;
-				color: var(--color-light);
+				color: var(--color-dark);
 				font-weight: 400;
 			}
 
@@ -863,7 +899,7 @@
 
 			.room,
 			.participants {
-				background: var(--color-dark);
+				background: var(--color-light);
 				max-height: 87.5vh;
 				border-radius: 0.7rem;
 				overflow: hidden;
@@ -894,7 +930,7 @@
 			.thread__top svg {
 				width: 1.6rem;
 				height: 1.6rem;
-				fill: var(--color-light);
+				fill: var(--color-dark);
 				cursor: pointer;
 			}
 
@@ -914,7 +950,7 @@
 			.room__topLeft svg {
 				width: 1.6rem;
 				height: 1.6rem;
-				fill: var(--color-light);
+				fill: var(--color-dark);
 			}
 
 			.room__topRight {
@@ -931,7 +967,7 @@
 				overflow-y: auto;
 				position: absolute;
 				width: 95%;
-				background: var(--color-dark);
+				background: var(--color-light);
 				z-index: 999;
 				top: 4.4rem;
 				padding-top: 2rem;
@@ -996,7 +1032,7 @@
 			.room__topics {
 				padding: 0.5rem 1.5rem;
 				background: var(--color-dark-light);
-				color: var(--color-light);
+				color: var(--color-dark);
 				display: inline-block;
 				font-size: 1.4rem;
 				border-radius: 1.5rem;
@@ -1025,7 +1061,7 @@
 			}
 
 			.thread {
-				border-left: 2px solid var(--color-dark);
+				border-left: 2px solid var(--color-light);
 				padding-left: 1rem;
 				margin: 2rem 0;
 				padding: 2rem;
@@ -1072,7 +1108,7 @@
 			.room__message > form > input {
 				resize: none;
 				background-color: var(--color-dark-light);
-				color: var(--color-light);
+				color: var(--color-dark);
 				border: none;
 				outline: none;
 				border-radius: 0.7rem;
@@ -1126,16 +1162,6 @@
 				font-weight: 1.4rem;
 			}
 		</style>
-		<script defer>
-			const dropdownMenu = document.querySelector(".dropdown-menu");
-			const dropdownButton = document.querySelector(".dropdown-button");
-
-			if (dropdownButton) {
-				dropdownButton.addEventListener("click", () => {
-					dropdownMenu.classList.toggle("show");
-				});
-			}
-		</script>
 		<title>Ube</title>
 	</head>
 	<body>
@@ -1153,5 +1179,18 @@
 			{% endif %}
 		</header>
 		{% block content %} {% endblock %}
+		<footer>
+			<script defer>
+				const dropdownMenu = document.querySelector(".dropdown-menu");
+				const dropdownButton =
+					document.querySelector(".dropdown-button");
+
+				if (dropdownButton) {
+					dropdownButton.addEventListener("click", () => {
+						dropdownMenu.classList.toggle("show");
+					});
+				}
+			</script>
+		</footer>
 	</body>
 </html>
