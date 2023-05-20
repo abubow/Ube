@@ -58,6 +58,7 @@
 				--color-dark-light: #ffb59a;
 				--color-light: #ffffff;/*#f2f2f2;*/
 				--color-gray: #e6e6e6;
+				--color-dark-gray: #767676;
 				--color-light-gray: #f2f2f2;
 				--color-bg: #f2f2f2;
 				--color-success: #8eff66;				
@@ -71,6 +72,7 @@
 				text-rendering: optimizeLegibility;
 				font-size: inherit;
 				font-weight: 300;	
+				color: var(--color-dark);
 			}
 			html {
 				font-size: 56.25%;
@@ -392,7 +394,7 @@
 				align-items: center;
 				font-weight: 500;
 				text-decoration: none;
-				color: var(--color-gray);
+				color: var(--color-dark-gray);
 			}
 
 			.header__menu img {
@@ -475,7 +477,7 @@
 			.layout__boxHeader {
 				display: flex;
 				padding: 1.5rem;
-				background-color: var(--color-dark-light);
+				background-color: var(--color-main);
 			}
 
 			.layout__boxTitle {
@@ -487,13 +489,13 @@
 			.layout__boxTitle h3 {
 				text-transform: uppercase;
 				font-weight: 500;
-				color: var(--color-dark);
+				color: var(--color-light-gray);
 			}
 
 			.layout__boxTitle svg {
 				width: 1.6rem;
 				height: 1.6rem;
-				fill: var(--color-main);
+				fill: var(--color-light-gray);
 			}
 
 			.layout__body {
@@ -763,7 +765,7 @@
 				text-transform: uppercase;
 				font-weight: 500;
 				padding: 1rem 1.5rem;
-				color: var(--color-mian-light);
+				color: var(--color-main-light);
 				letter-spacing: 1px;
 				font-size: 1.4rem;
 			}
@@ -784,7 +786,7 @@
 			}
 
 			.activities__boxHeader p span {
-				color: var(--color-gray);
+				color: var(--color-dark-gray);
 				font-size: 1.2rem;
 				display: block;
 			}
@@ -803,7 +805,7 @@
 
 			.activities__boxRoomContent {
 				background: var(--color-bg);
-				color: var(--color-light);
+				color: var(--color-dark);
 				padding: 1rem;
 				border-radius: 5px;
 				margin-top: 1rem;
@@ -881,12 +883,22 @@
 
 			.profile__about {
 				margin-top: 2rem;
+				border-bottom: 1px solid var(--color-light);
+				padding-bottom: 2rem;
+				margin-bottom: 2rem;
 			}
 
 			.profile__about h3 {
 				text-transform: uppercase;
 				color: var(--color-dark-light);
 				margin-bottom: 0.5rem;
+				font-weight: 500;
+			}
+			
+			.profile__about p {
+				color: var(--color-dark-gray);
+				font-weight: 300;
+				line-height: 1.5;
 			}
 
 			.profile-page .roomList__header {
@@ -918,7 +930,7 @@
 
 			.room__top,
 			.participants__top {
-				background: var(--color-dark-light);
+				background: var(--color-main);
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
@@ -930,7 +942,7 @@
 			.thread__top svg {
 				width: 1.6rem;
 				height: 1.6rem;
-				fill: var(--color-dark);
+				fill: var(--color-light-gray);
 				cursor: pointer;
 			}
 
@@ -968,6 +980,7 @@
 				position: absolute;
 				width: 95%;
 				background: var(--color-light);
+				color:var(--color-dark);
 				z-index: 999;
 				top: 4.4rem;
 				padding-top: 2rem;
@@ -1011,7 +1024,7 @@
 
 			.room__hosted p {
 				text-transform: uppercase;
-				color: var(--color-gray);
+				color: var(--color-dark-gray);
 				font-size: 1.2rem;
 				font-weight: 700;
 				line-height: 2;
@@ -1048,7 +1061,7 @@
 			.threads h3 {
 				text-transform: uppercase;
 				font-weight: 500;
-				color: var(--color-gray);
+				color: var(--color-dark-gray);
 			}
 
 			.threads {
@@ -1065,6 +1078,7 @@
 				padding-left: 1rem;
 				margin: 2rem 0;
 				padding: 2rem;
+				color: var(--color-dark);
 			}
 
 			.thread__top {
@@ -1107,7 +1121,7 @@
 
 			.room__message > form > input {
 				resize: none;
-				background-color: var(--color-dark-light);
+				background-color: var(--color-dark-gray);
 				color: var(--color-dark);
 				border: none;
 				outline: none;
@@ -1151,7 +1165,7 @@
 			}
 
 			.participant p {
-				color: var(--color-light-gray);
+				color: var(--color-dark-gray);
 				line-height: 1.2;
 			}
 
