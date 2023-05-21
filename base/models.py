@@ -1,7 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import User
-# Create your models here.
+from django.contrib.auth.models import User, AbstractUser
 
+class User(AbstractUser):
+    name = models.CharField(max_length=250, null=True)
+    email = models.EmailField(max_length=250, null=True, unique=True)
+    bio = models.TextField(null=True, blank=True)
+
+    avatar = models.ImageField(
+        null=True, blank=True, default='default.svg'
+    )
+    
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    # pass
 
 class Room(models.Model):
     id = models.AutoField(primary_key=True, unique=True, auto_created=True)

@@ -30,7 +30,7 @@
 		<div class="header__user">
 			<a href="{% url 'profile' user.id %}">
 				<div class="avatar avatar--medium active">
-					<img src="https://randomuser.me/api/portraits/men/37.jpg" />
+					<img src="{{ user.avatar.url }}" alt="" />
 				</div>
 				<p>
 					{{ user.first_name }}{{ user.last_name }}

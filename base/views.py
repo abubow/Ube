@@ -2,27 +2,26 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 # Create your views here.
 from django.http import HttpResponse
 from .models import Room, Topic, User, Message
-from .forms import RoomForm, UserForm
+from .forms import RoomForm, UserForm, UserSignUpForm
 
 
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=email)
         except:
             messages.error(request, 'Username or password is incorrect')
             print('user does not exist')
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -77,12 +76,12 @@ def userProfile(request, pk):
 def registerPage(request):
     context = {
         'title': 'Register',
-        'form': UserCreationForm,
+        'form': UserSignUpForm()
     }
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserSignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -232,7 +231,7 @@ def update_user(request, pk):
     if request.user != user:
         return HttpResponse('You are not authorized to view this page')
     if request.method == 'POST':
-        form = UserForm(request.POST, instance=user)
+        form = UserForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect('profile', pk=pk)

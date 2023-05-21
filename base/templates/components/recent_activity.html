@@ -9,7 +9,7 @@
 				href="{% url 'profile' post.user.id %}"
 				class="roomListRoom__author">
 				<div class="avatar avatar--small active">
-					<img src="https://randomuser.me/api/portraits/men/13.jpg" />
+					<img src="{{ post.user.avatar.url }}" alt="" />
 				</div>
 				<p>
 					{{ post.user.username }}

@@ -157,7 +157,7 @@
 			}
 
 			.btn > svg {
-				fill: currentColor;
+				fill: var(--color-light);
 				width: 1.6rem;
 				height: 1.6rem;
 			}
@@ -386,6 +386,7 @@
 			.header__menu {
 				margin-left: auto;
 				position: relative;
+				z-index: 999;
 			}
 
 			.header__menu a {
@@ -962,7 +963,7 @@
 			.room__topLeft svg {
 				width: 1.6rem;
 				height: 1.6rem;
-				fill: var(--color-dark);
+				fill: var(--color-light);
 			}
 
 			.room__topRight {
@@ -977,14 +978,11 @@
 			.room__header {
 				max-height: 30vh;
 				overflow-y: auto;
-				position: absolute;
 				width: 95%;
 				background: var(--color-light);
 				color:var(--color-dark);
 				z-index: 999;
-				top: 4.4rem;
-				padding-top: 2rem;
-				padding-bottom: 1rem;
+				padding: 2rem;
 			}
 
 			@media screen and (max-width: 500px) {
@@ -999,6 +997,9 @@
 				padding-right: 2rem;
 				height: 80.5vh;
 				padding-bottom: 0;
+				display: grid;
+				grid-template-columns: 1fr;
+				grid-template-rows: 1fr;
 			}
 
 			@media screen and (max-width: 500px) {
@@ -1010,6 +1011,7 @@
 					padding-bottom: 0;
 				}
 			}
+
 
 			.room__info {
 				display: flex;
@@ -1068,9 +1070,8 @@
 				background: var(--color-bg);
 				border-radius: 0.7rem;
 				overflow-y: auto;
-				height: 100%;
-				margin-top: 28vh;
-				padding: 0 2rem 4rem 2rem;
+				padding: 2rem;
+				min-height: 100%;
 			}
 
 			.thread {
@@ -1140,7 +1141,7 @@
 			}
 
 			.participants__top span {
-				color: var(--color-main);
+				color: var(--color-light-gray);
 				font-size: 1.3rem;
 				text-transform: none;
 			}
