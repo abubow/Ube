@@ -26,5 +26,11 @@
             "src": "/(.*)",
             "dest": "poll/wsgi.py"
         }
+    ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
     ]
 }
