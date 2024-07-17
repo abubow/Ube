@@ -1,3 +1,4 @@
 # git ignore for a django project
 
 ubeenv/
+.env
