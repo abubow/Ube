@@ -11,11 +11,9 @@ class RoomForm(ModelForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['name','avatar', 'username', 'email', 'bio']
-        # exclude = ['is_superuser', 'is_staff', 'is_active', 'date_joined', 'last_login', 'groups', 'user_permissions']
+        fields = ['name', 'avatar', 'email', 'bio'] 
 
 class UserSignUpForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['name', 'username', 'email', 'password1', 'password2']
-        # exclude = ['is_superuser', 'is_staff', 'is_active', 'date_joined', 'last_login', 'groups', 'user_permissions']
+        fields = ['name', 'email', 'password1', 'password2']
