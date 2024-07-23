@@ -125,7 +125,7 @@ rooms_data = [
 ]
 
 # Fetch the user who will be the host
-host_user = User.objects.get(email='smabuzar00@gmail.com')
+host_user = User.objects.get(email='sabuzar00@gmail.com')
 
 # Create rooms and assign topics
 for room_data in rooms_data:
